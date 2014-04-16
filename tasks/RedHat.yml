@@ -140,28 +140,28 @@
   seboolean: name=httpd_can_network_connect state=yes persistent=yes
 
 
-- name: Open the IPTables port 10051 on Zabbix-Server
-  lineinfile: dest=/etc/sysconfig/iptables
-              regexp="^-A INPUT -p {{item.protocol}} -m {{item.protocol}} --dport {{item.port}} -j ACCEPT$"
-              line="-A INPUT -p {{item.protocol}} -m {{item.protocol}} --dport {{item.port}} -j ACCEPT"
-              insertafter="^:OUTPUT ACCEPT \[\d*:\d*\]$"
-  with_items:
-   - { protocol: tcp, port: 10051 }
-  notify:
-    - restart iptables
-  tags:
-    - zabbix
-
-
-- name: Open the IPTables port 80 on Apache Server
-  lineinfile: dest=/etc/sysconfig/iptables
-              regexp="^-A INPUT -p {{item.protocol}} -m {{item.protocol}} --dport {{item.port}} -j ACCEPT$"
-              line="-A INPUT -p {{item.protocol}} -m {{item.protocol}} --dport {{item.port}} -j ACCEPT"
-              insertafter="^:OUTPUT ACCEPT \[\d*:\d*\]$"
-  with_items:
-   - { protocol: tcp, port: 80 }
-  notify:
-    - restart iptables
-  tags:
-    - http
+#- name: Open the IPTables port 10051 on Zabbix-Server
+#  lineinfile: dest=/etc/sysconfig/iptables
+#              regexp="^-A INPUT -p {{item.protocol}} -m {{item.protocol}} --dport {{item.port}} -j ACCEPT$"
+#              line="-A INPUT -p {{item.protocol}} -m {{item.protocol}} --dport {{item.port}} -j ACCEPT"
+#              insertafter="^:OUTPUT ACCEPT \[\d*:\d*\]$"
+#  with_items:
+#   - { protocol: tcp, port: 10051 }
+#  notify:
+#    - restart iptables
+#  tags:
+#    - zabbix
+#
+#
+#- name: Open the IPTables port 80 on Apache Server
+#  lineinfile: dest=/etc/sysconfig/iptables
+#              regexp="^-A INPUT -p {{item.protocol}} -m {{item.protocol}} --dport {{item.port}} -j ACCEPT$"
+#              line="-A INPUT -p {{item.protocol}} -m {{item.protocol}} --dport {{item.port}} -j ACCEPT"
+#              insertafter="^:OUTPUT ACCEPT \[\d*:\d*\]$"
+#  with_items:
+#   - { protocol: tcp, port: 80 }
+#  notify:
+#    - restart iptables
+#  tags:
+#    - http
 

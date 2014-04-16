@@ -10,14 +10,14 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
  config.vm.define :zabbix do |zabbix|
     zabbix.vm.box = "chef/centos-6.5"
     zabbix.vm.hostname = "zabbix"
-    #zabbix.vm.provider :virtualbox do |vb|
-    #  vb.gui = true
-    #end
+    zabbix.vm.network "private_network", ip: "192.168.50.4"
+    #zabbix.vm.network "public_network"
 
     zabbix.vm.provision "ansible" do |ansible|
         ansible.playbook = "zabbix-server.yml"
         ansible.sudo = true
         #ansible.verbose = "vvvv"
+        #ansible.inventory_path = "hosts"
         ansible.extra_vars = {
           "virtualbox_client" => true
         }
